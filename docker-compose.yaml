@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  data_source_1:
+    build:
+      context: ./data_sources
+      dockerfile: Dockerfile
+    container_name: data_source_1
+    command: python run_data_source_1.py
+    volumes:
+      - ./data_sources:/app
+    working_dir: /app
+
+  data_source_2:
+    build:
+      context: ./data_sources
+      dockerfile: Dockerfile
+    container_name: data_source_2
+    command: python run_data_source_2.py
+    volumes:
+      - ./data_sources:/app
+    working_dir: /app
+
+  data_source_3:
+    build:
+      context: ./data_sources
+      dockerfile: Dockerfile
+    container_name: data_source_3
+    command: python run_data_source_3.py
+    volumes:
+      - ./data_sources:/app
+    working_dir: /app

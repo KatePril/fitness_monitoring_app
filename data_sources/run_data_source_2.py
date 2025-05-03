@@ -1,5 +1,5 @@
 import time
-from fitness_watch_simulator.data_source_1.data_generation.data_generator import DataGenerator
+from data_generation.data_generator import DataGenerator
 
 if __name__ == '__main__':
     while True:
