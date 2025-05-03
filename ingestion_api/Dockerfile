@@ -7,4 +7,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8081
 
-CMD ["python", "api.py"]
+CMD ["/app/wait-for-it.sh", "postgres:5432", "--", "python", "api.py"]
