@@ -1,6 +1,5 @@
 import unittest
-from unittest.mock import Mock, call
-from types import SimpleNamespace
+from unittest.mock import Mock
 
 from ingestion_api.insert_health_data import insert_health_data
 from ingestion_api.entities.health_data import HealthData
