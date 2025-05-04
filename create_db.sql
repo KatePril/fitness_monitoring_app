@@ -3,8 +3,8 @@ CREATE TABLE IF NOT EXISTS app_user (
     username VARCHAR(80) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
     password TEXT NOT NULL,
-    weight NUMERIC(5,2),
-    height NUMERIC(5,2)
+    weight NUMERIC,
+    height NUMERIC
 );
 
 INSERT INTO app_user(username, email, password, weight, height)
