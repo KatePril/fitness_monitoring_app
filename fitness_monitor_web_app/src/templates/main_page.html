@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <header>
+        <h1>Hi, {{ username }}</h1>
+
+        <form action="{{ url_for('edit_profile') }}" method="get">
+            <button type="submit">Edit profile</button>
+        </form>
+
+        <form action="{{ url_for('sign_out') }}" method="get">
+            <button type="submit">Sign out</button>
+        </form>
+    </header>
+</body>
+</html>
