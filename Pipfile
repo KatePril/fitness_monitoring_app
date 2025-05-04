@@ -8,6 +8,7 @@ dotenv = "*"
 psycopg2 = "*"
 flask = "*"
 requests = "*"
+werkzeug = "*"
 
 [dev-packages]
 
