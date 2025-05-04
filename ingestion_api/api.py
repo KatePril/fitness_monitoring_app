@@ -4,6 +4,7 @@ from psycopg2 import connect
 import os
 
 from entities.health_data import HealthData
+from ingestion_api.insert_health_data import insert_health_data
 
 load_dotenv()
 POSTGRES_USER = os.getenv("POSTGRES_USER")
@@ -24,29 +25,8 @@ app = Flask(__name__)
 
 @app.route("/", methods=["POST"])
 def ingest_data():
-    try:
-        health_data = HealthData(request.get_json())
-        query = '''
-            INSERT INTO health_data ("timestamp", heart_rate, saturation, steps, calories, user_id)     
-            VALUES (%s, %s, %s, %s, %s, %s)
-        '''
-        cursor.execute(
-            query,
-            (
-                health_data.timestamp,
-                health_data.heart_rate,
-                health_data.saturation,
-                health_data.steps,
-                health_data.calories,
-                health_data.user_id
-            )
-        )
-        conn.commit()
-        return "OK"
-    except Exception as e:
-        conn.rollback()
-        print("Error:", e)
-        return "ERROR"
+    health_data = HealthData(request.get_json())
+    return insert_health_data(health_data, cursor, conn)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8081, debug=True)
