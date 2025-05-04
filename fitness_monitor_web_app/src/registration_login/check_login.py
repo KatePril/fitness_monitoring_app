@@ -9,7 +9,6 @@ SELECT_BY_EMAIL_QUERY = """
 def check_login(email, password, cursor):
     cursor.execute(SELECT_BY_EMAIL_QUERY, (email,))
     fetched_data = cursor.fetchone()
-    print(fetched_data)
 
     if fetched_data:
         if check_password(password, fetched_data[1]):

@@ -9,7 +9,6 @@ class User:
 
     @classmethod
     def from_dict(cls, data):
-        print(data)
         user = cls(
             data['register_username'],
             data['register_email'],
@@ -18,5 +17,4 @@ class User:
             data['register_height'],
             data.get('user_id')
         )
-        print(user.__dict__)
         return user

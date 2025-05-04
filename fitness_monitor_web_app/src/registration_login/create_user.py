@@ -7,7 +7,6 @@ INSERTION_QUERY = """
 """
 
 def create_user(user: User, cursor, conn) -> int|None:
-    print(user.username)
     try:
         cursor.execute(
             INSERTION_QUERY,
