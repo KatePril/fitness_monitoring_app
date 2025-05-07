@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock
 
-from fitness_monitor_web_app.src.registration_login.check_login import check_login
+from fitness_monitor_web_app.src.registration_login.check_login import check_login, SELECT_BY_EMAIL_QUERY
 from fitness_monitor_web_app.src.registration_login.password import get_password_hash
 
 class TestCheckUserRetrieval(unittest.TestCase):
@@ -17,7 +17,7 @@ class TestCheckUserRetrieval(unittest.TestCase):
         user_id = check_login("mark@example.com", password, self.cursor)
 
         self.cursor.execute.assert_called_once_with(
-            "\n    SELECT user_id, password\n    FROM app_user\n    WHERE email = %s\n",
+            SELECT_BY_EMAIL_QUERY,
             ("mark@example.com",)
         )
         self.assertEqual(user_id, 1)
