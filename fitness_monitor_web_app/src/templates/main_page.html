@@ -2,33 +2,104 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8fdfc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #47b985;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        header form {
+            margin-left: 10px;
+        }
+
+        header button {
+            background-color: #77f3ef;
+            border: none;
+            padding: 10px 16px;
+            margin-left: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        header button:hover {
+            background-color: #16e97b;
+            color: white;
+        }
+
+        .content {
+            max-width: 100%;
+            margin: 40px auto;
+            padding: 20px;
+             display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background-color: #77f3ef;
+            border: 2px solid #77f3ef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-box h3 {
+            margin: 0;
+            color: #047140;
+        }
+    </style>
 </head>
+
 <body>
     <header>
         <h1>Hi, {{ username }}</h1>
-
-        <form action="/edit_profile" method="get">
-            <button type="submit">Edit profile</button>
-        </form>
-
-        <form action="/sign_out" method="get">
-            <button type="submit">Sign out</button>
-        </form>
-    </header>
-    <div>
         <div>
+            <form action="/edit_profile" method="get" style="display:inline;">
+                <button type="submit">Edit profile</button>
+            </form>
+            <form action="/sign_out" method="get" style="display:inline;">
+                <button type="submit">Sign out</button>
+            </form>
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="stat-box">
             <h3>Your heart rate: {{ heart_rate }}</h3>
         </div>
-        <div>
+        <div class="stat-box">
             <h3>Your saturation: {{ saturation }}</h3>
         </div>
-        <div>
+        <div class="stat-box">
             <h3>Number of steps you walked today: {{ total_steps }}</h3>
         </div>
-        <div>
+        <div class="stat-box">
             <h3>Calories burnt today: {{ total_calories }}</h3>
         </div>
     </div>
 </body>
+
 </html>
