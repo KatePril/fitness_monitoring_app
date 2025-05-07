@@ -113,7 +113,9 @@
 
 <div class="container">
     <h2>Profile Information</h2>
-    <form method="POST" action="/update_profile">
+    <form method="POST">
+        <input type="hidden" name="form_type" value="update_user">
+
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" value="{{ user.username }}" required>
 
@@ -133,7 +135,9 @@
     {% endif %}
 </div>
 <div class="container">
-    <form method="POST" action="/update_password">
+    <form method="POST">
+        <input type="hidden" name="form_type" value="update_password">
+
         <label for="new_password">New password:</label>
         <input type="password" id="new_password" name="new_password">
 
@@ -142,7 +146,7 @@
         <input type="submit" value="Change password">
     </form>
 
-    {% if message %}
+    {% if password_message %}
         <div class="message">{{ password_message }}</div>
     {% endif %}
 </div>

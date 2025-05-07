@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 
 from fitness_monitor_web_app.src.registration_login_edit.landing import process_landing
-from fitness_monitor_web_app.src.registration_login_edit.edit_account import edit_account_get
+from fitness_monitor_web_app.src.registration_login_edit.edit_account import edit_account_get, edit_account_post
 from fitness_monitor_web_app.src.dashboards.main_dashboard import get_main_dashboard
 app = Flask(__name__)
 
@@ -34,7 +34,7 @@ def main_dashboard():
 @app.route('/edit-profile', methods=["GET", "POST"])
 def edit_profile():
     if request.method == "POST":
-        pass
+        return edit_account_post(request.form)
     else:
         return edit_account_get()
 
