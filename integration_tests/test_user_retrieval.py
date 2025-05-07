@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import Mock
 
-from fitness_monitor_web_app.src.registration_login.check_login import check_login, SELECT_BY_EMAIL_QUERY
-from fitness_monitor_web_app.src.registration_login.password import get_password_hash
+from fitness_monitor_web_app.src.registration_login_edit.queries.retrieve_user import check_login, SELECT_BY_EMAIL_QUERY
+from fitness_monitor_web_app.src.registration_login_edit.password import get_password_hash
 
 class TestCheckUserRetrieval(unittest.TestCase):
     def setUp(self):

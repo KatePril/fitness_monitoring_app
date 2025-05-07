@@ -18,3 +18,20 @@ class User:
             data.get('user_id')
         )
         return user
+
+    @classmethod
+    def from_tuple(cls, data: tuple):
+        return cls(
+            username=data[1],
+            email=data[2],
+            password=data[3],
+            weight=data[4],
+            height=data[5],
+            user_id=data[0]
+        )
+
+    def update(self, username, email, weight, height):
+        self.username = username
+        self.email = email
+        self.weight = weight
+        self.height = height

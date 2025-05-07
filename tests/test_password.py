@@ -1,5 +1,5 @@
 import unittest
-from fitness_monitor_web_app.src.registration_login.password import get_password_hash, check_password_hash
+from fitness_monitor_web_app.src.registration_login_edit.password import get_password_hash, check_password_hash
 
 class UnitTestRegistrationLogin(unittest.TestCase):
     def test_password_hash_generation(self):

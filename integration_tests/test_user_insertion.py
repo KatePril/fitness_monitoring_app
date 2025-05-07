@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import Mock
 
 from fitness_monitor_web_app.src.entities.user import User
-from fitness_monitor_web_app.src.registration_login.create_user import create_user
+from fitness_monitor_web_app.src.registration_login_edit.queries.create_user import create_user
 
 class TestInsertUser(unittest.TestCase):
     def setUp(self):
