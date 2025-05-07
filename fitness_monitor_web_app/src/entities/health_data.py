@@ -36,3 +36,6 @@ class HealthData:
             calories=health_data[5],
             user_id=health_data[6]
         )
+
+    def __eq__(self, other):
+        return self.item_id == other.item_id

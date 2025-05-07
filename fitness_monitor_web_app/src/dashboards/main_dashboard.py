@@ -11,6 +11,6 @@ def get_main_dashboard(user_id):
         username=username,
         heart_rate=heath_data.heart_rate,
         saturation=heath_data.saturation,
-        total_steps=today_total[0],
-        total_calories=round(today_total[1], 3),
+        total_steps= today_total[0] if today_total[0] is not None else 0,
+        total_calories=round(today_total[1], 3) if today_total[1] is not None else 0,
     )

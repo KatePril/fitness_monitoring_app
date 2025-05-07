@@ -24,7 +24,6 @@ SELECT_TODAY_TOTAL_QUERY = """
 def select_latest_record(user_id, cursor):
     cursor.execute(SELECT_LATEST_RECORD_QUERY, (user_id,))
     data = cursor.fetchone()
-    print(data)
     return HealthData.from_tuple(data)
 
 def select_username(user_id, cursor):
