@@ -20,7 +20,24 @@ def main_dashboard():
     user_id = session.get("user_id")
     if user_id is None:
         return redirect("/")
+    action = request.form.get("action")
+    print(action)
+    if action:
+        if action == "edit_profile":
+            pass
+        elif action == "sign_out":
+            session.pop("user_id")
+            return redirect("/")
     return get_main_dashboard(user_id)
+
+@app.route('/edit-profile')
+def edit_profile():
+    pass
+
+@app.route('/sign-out')
+def sign_out():
+    session.pop("user_id")
+    return redirect("/")
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080, debug=True)

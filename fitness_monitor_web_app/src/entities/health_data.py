@@ -27,15 +27,26 @@ class HealthData:
 
     @classmethod
     def from_tuple(cls, health_data: tuple):
-        return cls(
-            item_id=health_data[0],
-            timestamp=health_data[1],
-            heart_rate=health_data[2],
-            saturation=health_data[3],
-            steps=health_data[4],
-            calories=health_data[5],
-            user_id=health_data[6]
-        )
+        if health_data:
+            return cls(
+                item_id=health_data[0],
+                timestamp=health_data[1],
+                heart_rate=health_data[2],
+                saturation=health_data[3],
+                steps=health_data[4],
+                calories=health_data[5],
+                user_id=health_data[6]
+            )
+        else:
+            return cls(
+                item_id=None,
+                timestamp=None,
+                heart_rate=None,
+                saturation=None,
+                steps=0,
+                calories=0,
+                user_id=None
+            )
 
     def __eq__(self, other):
         return self.item_id == other.item_id
