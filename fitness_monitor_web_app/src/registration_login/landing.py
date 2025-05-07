@@ -1,4 +1,4 @@
-from flask import render_template, session
+from flask import render_template, session, redirect
 from fitness_monitor_web_app.src.registration_login.check_login import check_login
 from fitness_monitor_web_app.src.database_connection import cursor, conn
 from fitness_monitor_web_app.src.entities.user import User
@@ -16,9 +16,10 @@ def process_landing(form):
         if user_id is None:
             message = "Email or password is incorrect"
             return render_template("landing_page.html", message=message)
+        session["user_id"] = user_id
     elif form_type == "sign_up":
         user = User.from_dict(form)
         user.password = get_password_hash(user.password)
         user_id = create_user(user, cursor, conn)
         session["user_id"] = user_id
-    return render_template("landing_page.html", message="Success")
+    return redirect("/dashboard")

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect
 from dotenv import load_dotenv
 import os
 
@@ -19,8 +19,8 @@ def index():
 def main_dashboard():
     user_id = session.get("user_id")
     if user_id is None:
-        return render_template("landing_page.html")
-    return get_main_dashboard(user_id )
+        return redirect("/")
+    return get_main_dashboard(user_id)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080, debug=True)
