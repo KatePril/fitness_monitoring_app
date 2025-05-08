@@ -35,3 +35,6 @@ class User:
         self.email = email
         self.weight = weight
         self.height = height
+
+    def __eq__(self, other):
+        return self.user_id == other.user_id

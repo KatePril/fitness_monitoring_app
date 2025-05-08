@@ -8,14 +8,14 @@ from fitness_monitor_web_app.src.entities.health_data import HealthData
 
 class TesttMainDashboardDataRetrieval(unittest.TestCase):
     def setUp(self):
-        self.cursor = Mock()
+        self.mock_cursor = Mock()
 
     def test_select_latest_record(self):
         fetched_data = (843, datetime.datetime(2025, 5, 7, 13, 14, 5, 473097), 106, 95, 1, 0.04, 1)
-        self.cursor.fetchone.return_value = fetched_data
+        self.mock_cursor.fetchone.return_value = fetched_data
 
-        result = select_latest_record(1, self.cursor)
-        self.cursor.execute.assert_called_once_with(
+        result = select_latest_record(1, self.mock_cursor)
+        self.mock_cursor.execute.assert_called_once_with(
             SELECT_LATEST_RECORD_QUERY,
             (1,)
         )
@@ -23,10 +23,10 @@ class TesttMainDashboardDataRetrieval(unittest.TestCase):
 
     def test_select_username(self):
         username = "Ann"
-        self.cursor.fetchone.return_value = (username,)
+        self.mock_cursor.fetchone.return_value = (username,)
 
-        result = select_username(1, self.cursor)
-        self.cursor.execute.assert_called_once_with(
+        result = select_username(1, self.mock_cursor)
+        self.mock_cursor.execute.assert_called_once_with(
             SELECT_USERNAME_QUERY,
             (1,)
         )
@@ -34,10 +34,10 @@ class TesttMainDashboardDataRetrieval(unittest.TestCase):
 
     def test_select_today_total(self):
         fetched_data = (451, 18.04)
-        self.cursor.fetchone.return_value = fetched_data
+        self.mock_cursor.fetchone.return_value = fetched_data
 
-        result = select_today_total(1, self.cursor)
-        self.cursor.execute.assert_called_once_with(
+        result = select_today_total(1, self.mock_cursor)
+        self.mock_cursor.execute.assert_called_once_with(
             SELECT_TODAY_TOTAL_QUERY,
             (1,)
         )
