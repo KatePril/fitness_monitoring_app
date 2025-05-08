@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8fdfc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #47b985;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .back-button {
+            background-color: #77f3ef;
+            color: #044;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #16e97b;
+            color: white;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 30px;
+            border: 2px solid #77f3ef;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            text-align: center;
+            color: #16e97b;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #47b985;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #47b985;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #16e97b;
+        }
+
+        .message {
+            background-color: #77f3ef;
+            padding: 10px;
+            border-radius: 5px;
+            color: #044;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Edit Your Profile</h1>
+    <a href="/dashboard" class="back-button">← Return Back</a>
+</header>
+
+<div class="container">
+    <h2>Profile Information</h2>
+    <form method="POST">
+        <input type="hidden" name="form_type" value="update_user">
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="{{ user.username }}" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ user.email }}" required>
+
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" name="weight" value="{{ user.weight }}" step="0.1" min="0" required>
+
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height" name="height" value="{{ user.height }}" step="0.1" min="0" required>
+
+        <input type="submit" value="Save changes">
+    </form>
+    {% if message %}
+        <div class="message">{{ message }}</div>
+    {% endif %}
+</div>
+<div class="container">
+    <form method="POST">
+        <input type="hidden" name="form_type" value="update_password">
+
+        <label for="new_password">New password:</label>
+        <input type="password" id="new_password" name="new_password" required>
+
+        <label for="old_password">Old password:</label>
+        <input type="password" id="old_password" name="old_password" required>
+        <input type="submit" value="Change password">
+    </form>
+
+    {% if password_message %}
+        <div class="message">{{ password_message }}</div>
+    {% endif %}
+</div>
+
+</body>
+</html>

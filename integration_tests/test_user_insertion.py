@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import Mock
 
 from fitness_monitor_web_app.src.entities.user import User
-from fitness_monitor_web_app.src.registration_login.create_user import create_user
+from fitness_monitor_web_app.src.registration_login_edit.queries.create_user import create_user
 
 class TestInsertUser(unittest.TestCase):
     def setUp(self):
@@ -28,7 +28,6 @@ class TestInsertUser(unittest.TestCase):
 
     def test_insert_failure(self):
         self.mock_cursor.execute.side_effect = Exception("DB error")
-
         result = create_user(self.user, self.mock_cursor, self.mock_conn)
 
         self.mock_conn.rollback.assert_called_once()

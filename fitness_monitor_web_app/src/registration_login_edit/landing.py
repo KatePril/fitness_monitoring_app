@@ -1,9 +1,9 @@
 from flask import render_template, session, redirect
-from fitness_monitor_web_app.src.registration_login.check_login import check_login
+from fitness_monitor_web_app.src.registration_login_edit.queries.retrieve_user import check_login
 from fitness_monitor_web_app.src.database_connection import cursor, conn
 from fitness_monitor_web_app.src.entities.user import User
-from fitness_monitor_web_app.src.registration_login.create_user import create_user
-from fitness_monitor_web_app.src.registration_login.password import get_password_hash
+from fitness_monitor_web_app.src.registration_login_edit.queries.create_user import create_user
+from fitness_monitor_web_app.src.registration_login_edit.password import get_password_hash
 
 def process_landing(form):
     form_type = form.get("form_type")
