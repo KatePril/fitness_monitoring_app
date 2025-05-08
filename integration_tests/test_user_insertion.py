@@ -28,7 +28,6 @@ class TestInsertUser(unittest.TestCase):
 
     def test_insert_failure(self):
         self.mock_cursor.execute.side_effect = Exception("DB error")
-
         result = create_user(self.user, self.mock_cursor, self.mock_conn)
 
         self.mock_conn.rollback.assert_called_once()
