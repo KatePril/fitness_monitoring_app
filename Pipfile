@@ -9,6 +9,7 @@ psycopg2 = "*"
 flask = "*"
 requests = "*"
 werkzeug = "*"
+matplotlib = "*"
 
 [dev-packages]
 
