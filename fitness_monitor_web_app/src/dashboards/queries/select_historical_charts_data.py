@@ -73,7 +73,7 @@ SELECT_LAST_YEAR_STATISTICS = """
       GROUP BY date_trunc('month', timestamp)
     )
     SELECT
-      TO_CHAR(m.month_start, 'YYYY-MM') AS month,
+      TO_CHAR(m.month_start, 'MM-YYYY') AS month,
       COALESCE(a.total_steps, 0) AS total_steps,
       COALESCE(a.total_calories, 0) AS total_calories
     FROM months m
