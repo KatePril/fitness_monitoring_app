@@ -70,6 +70,11 @@
             margin: 0;
             color: #047140;
         }
+
+        .chart-img {
+            border-radius: 15px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
     </style>
 </head>
 
@@ -99,6 +104,10 @@
         <div class="stat-box">
             <h3>Calories burnt today: <b>{{ total_calories }}</b></h3>
         </div>
+    </div>
+    <div class="content">
+        <img src="data:image/png;base64,{{ steps_chart }}" class="chart-img" alt="Bar Chart">
+        <img src="data:image/png;base64,{{ calories_chart }}" class="chart-img" alt="Bar Chart">
     </div>
 </body>
 
