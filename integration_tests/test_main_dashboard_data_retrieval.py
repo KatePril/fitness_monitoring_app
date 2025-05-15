@@ -2,7 +2,7 @@ import datetime
 import unittest
 from unittest.mock import Mock
 
-from fitness_monitor_web_app.src.dashboards.select_data import *
+from fitness_monitor_web_app.src.dashboards.queries.select_data import *
 from fitness_monitor_web_app.src.entities.health_data import HealthData
 
 
