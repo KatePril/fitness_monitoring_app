@@ -6,7 +6,7 @@ from fitness_monitor_web_app.src.dashboards.queries.select_data import *
 from fitness_monitor_web_app.src.entities.health_data import HealthData
 
 
-class TesttMainDashboardDataRetrieval(unittest.TestCase):
+class TestMainDashboardDataRetrieval(unittest.TestCase):
     def setUp(self):
         self.mock_cursor = Mock()
 
