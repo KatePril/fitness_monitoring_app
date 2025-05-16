@@ -60,6 +60,8 @@
         .chart-container {
             margin: 20px;
             text-align: center;
+            display: flex;
+            flex-direction: column;
         }
 
         select {
@@ -72,7 +74,6 @@
         .chart-img {
             border-radius: 15px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-            max-width: 400px;
             margin-top: 10px;
         }
     </style>
@@ -93,7 +94,7 @@
 
     <div class="content">
         <div class="chart-container">
-            <h3>Steps Chart</h3>
+            <h3>Steps</h3>
             <select id="steps-select">
                 <option value="week">Last Week</option>
                 <option value="month">Last Month</option>
@@ -103,7 +104,7 @@
         </div>
 
         <div class="chart-container">
-            <h3>Calories Chart</h3>
+            <h3>Calories</h3>
             <select id="calories-select">
                 <option value="week">Last Week</option>
                 <option value="month">Last Month</option>
@@ -113,8 +114,11 @@
         </div>
     </div>
 
+    <form action="{{ url_for('main_dashboard') }}" method="get" style="display:inline;">
+        <button type="submit">Check how you are doing today</button>
+    </form>
+
     <script>
-        // All six base64 chart images injected by backend
         const charts = {
             steps: {
                 week: "data:image/png;base64,{{ steps_week }}",
@@ -140,7 +144,6 @@
             caloriesChart.src = charts.calories[caloriesRange];
         }
 
-        // Initialize
         stepsSelect.addEventListener('change', updateCharts);
         caloriesSelect.addEventListener('change', updateCharts);
         updateCharts();

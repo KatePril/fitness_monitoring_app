@@ -4,7 +4,7 @@ import base64
 import matplotlib.pyplot as plt
 
 class Chart:
-    def __init__(self, values, title, categories=None):
+    def __init__(self, values, title, rotation=45, categories=None):
         if categories is None:
             self.categories = [
                 "01:00", "02:00", "03:00", "04:00", "05:00", "06:00",
@@ -14,14 +14,15 @@ class Chart:
             ]
         else:
             self.categories = categories
+        self.rotation = rotation
         self.values = values
         self.title = title
 
     def get_chart_image(self):
         fig, ax = plt.subplots()
         ax.bar(self.categories, self.values, color='#047140')
-        ax.set_title(self.title)
-        ax.set_xticklabels(self.categories, rotation=45, ha='right')
+        # ax.set_title(self.title)
+        ax.set_xticklabels(self.categories, rotation=self.rotation, ha='right')
         buffer = io.BytesIO()
         plt.savefig(buffer, format="png")
         buffer.seek(0)

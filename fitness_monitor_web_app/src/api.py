@@ -5,6 +5,7 @@ import os
 from fitness_monitor_web_app.src.registration_login_edit.landing import process_landing
 from fitness_monitor_web_app.src.registration_login_edit.edit_account import edit_account_get, edit_account_post
 from fitness_monitor_web_app.src.dashboards.main_dashboard import get_main_dashboard
+from fitness_monitor_web_app.src.dashboards.historical_dashboard import get_historical_dashboard
 app = Flask(__name__)
 
 load_dotenv()
@@ -21,15 +22,14 @@ def main_dashboard():
     user_id = session.get("user_id")
     if user_id is None:
         return redirect("/")
-    action = request.form.get("action")
-    print(action)
-    if action:
-        if action == "edit_profile":
-            pass
-        elif action == "sign_out":
-            session.pop("user_id")
-            return redirect("/")
     return get_main_dashboard(user_id)
+
+@app.route("/historical_dashboards", methods=["GET"])
+def historical_dashboards():
+    user_id = session.get("user_id")
+    if user_id is None:
+        return redirect("/")
+    return get_historical_dashboard(user_id)
 
 @app.route('/edit-profile', methods=["GET", "POST"])
 def edit_profile():

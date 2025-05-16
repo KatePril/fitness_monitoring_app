@@ -109,6 +109,10 @@
         <img src="data:image/png;base64,{{ steps_chart }}" class="chart-img" alt="Bar Chart">
         <img src="data:image/png;base64,{{ calories_chart }}" class="chart-img" alt="Bar Chart">
     </div>
+
+    <form action="{{ url_for('historical_dashboards') }}" method="get" style="display:inline;">
+        <button type="submit">Check out your past activity</button>
+    </form>
 </body>
 
 </html>
