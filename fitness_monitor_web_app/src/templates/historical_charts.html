@@ -76,12 +76,23 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
             margin-top: 10px;
         }
+
+        #dashboard-button {
+            background-color: #77f3ef;
+            border: 2px solid #77f3ef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            font-weight: bold;
+        }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>Hi, {{ username }}</h1>
+        <h1>This is your past activity statistics, {{ username }}</h1>
         <div>
             <form action="{{ url_for('edit_profile') }}" method="get" style="display:inline;">
                 <button type="submit">Edit profile</button>
@@ -113,10 +124,11 @@
             <img id="calories-chart" class="chart-img" alt="Calories Chart">
         </div>
     </div>
-
-    <form action="{{ url_for('main_dashboard') }}" method="get" style="display:inline;">
-        <button type="submit">Check how you are doing today</button>
-    </form>
+    <div class="content">
+        <form action="{{ url_for('main_dashboard') }}" method="get" style="display:inline;width:100%">
+            <button type="submit" id="dashboard-button">Check how you are doing today</button>
+        </form>
+    </div>
 
     <script>
         const charts = {
