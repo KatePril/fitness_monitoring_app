@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Charts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8fdfc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #47b985;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        header form {
+            margin-left: 10px;
+        }
+
+        header button {
+            background-color: #77f3ef;
+            border: none;
+            padding: 10px 16px;
+            margin-left: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        header button:hover {
+            background-color: #16e97b;
+            color: white;
+        }
+
+        .content {
+            max-width: 100%;
+            margin: 40px auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .chart-container {
+            margin: 20px;
+            text-align: center;
+        }
+
+        select {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .chart-img {
+            border-radius: 15px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            max-width: 400px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Hi, {{ username }}</h1>
+        <div>
+            <form action="{{ url_for('edit_profile') }}" method="get" style="display:inline;">
+                <button type="submit">Edit profile</button>
+            </form>
+            <form action="{{ url_for('sign_out') }}" method="get" style="display:inline;">
+                <button type="submit">Sign out</button>
+            </form>
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="chart-container">
+            <h3>Steps Chart</h3>
+            <select id="steps-select">
+                <option value="week">Last Week</option>
+                <option value="month">Last Month</option>
+                <option value="year">Last Year</option>
+            </select>
+            <img id="steps-chart" class="chart-img" alt="Steps Chart">
+        </div>
+
+        <div class="chart-container">
+            <h3>Calories Chart</h3>
+            <select id="calories-select">
+                <option value="week">Last Week</option>
+                <option value="month">Last Month</option>
+                <option value="year">Last Year</option>
+            </select>
+            <img id="calories-chart" class="chart-img" alt="Calories Chart">
+        </div>
+    </div>
+
+    <script>
+        // All six base64 chart images injected by backend
+        const charts = {
+            steps: {
+                week: "data:image/png;base64,{{ steps_week }}",
+                month: "data:image/png;base64,{{ steps_month }}",
+                year: "data:image/png;base64,{{ steps_year }}"
+            },
+            calories: {
+                week: "data:image/png;base64,{{ calories_week }}",
+                month: "data:image/png;base64,{{ calories_month }}",
+                year: "data:image/png;base64,{{ calories_year }}"
+            }
+        };
+
+        const stepsSelect = document.getElementById('steps-select');
+        const caloriesSelect = document.getElementById('calories-select');
+        const stepsChart = document.getElementById('steps-chart');
+        const caloriesChart = document.getElementById('calories-chart');
+
+        function updateCharts() {
+            const stepsRange = stepsSelect.value;
+            const caloriesRange = caloriesSelect.value;
+            stepsChart.src = charts.steps[stepsRange];
+            caloriesChart.src = charts.calories[caloriesRange];
+        }
+
+        // Initialize
+        stepsSelect.addEventListener('change', updateCharts);
+        caloriesSelect.addEventListener('change', updateCharts);
+        updateCharts();
+    </script>
+</body>
+</html>
