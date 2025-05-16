@@ -3,6 +3,7 @@ from unittest.mock import Mock
 
 from fitness_monitor_web_app.src.dashboards.queries.select_today_charts_data import *
 
+
 class TestChartDataRetrieval(unittest.TestCase):
     def setUp(self):
         self.mock_cursor = Mock()

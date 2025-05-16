@@ -106,50 +106,49 @@
 </head>
 <body>
 
-<header>
-    <h1>Edit Your Profile</h1>
-    <a href="/dashboard" class="back-button">← Return Back</a>
-</header>
+    <header>
+        <h1>Edit Your Profile</h1>
+        <a href="/dashboard" class="back-button">← Return Back</a>
+    </header>
 
-<div class="container">
-    <h2>Profile Information</h2>
-    <form method="POST">
-        <input type="hidden" name="form_type" value="update_user">
+    <div class="container">
+        <h2>Profile Information</h2>
+        <form method="POST">
+            <input type="hidden" name="form_type" value="update_user">
 
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" value="{{ user.username }}" required>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="{{ user.username }}" required>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="{{ user.email }}" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{ user.email }}" required>
 
-        <label for="weight">Weight (kg):</label>
-        <input type="number" id="weight" name="weight" value="{{ user.weight }}" step="0.1" min="0" required>
+            <label for="weight">Weight (kg):</label>
+            <input type="number" id="weight" name="weight" value="{{ user.weight }}" step="0.1" min="0" required>
 
-        <label for="height">Height (cm):</label>
-        <input type="number" id="height" name="height" value="{{ user.height }}" step="0.1" min="0" required>
+            <label for="height">Height (cm):</label>
+            <input type="number" id="height" name="height" value="{{ user.height }}" step="0.1" min="0" required>
 
-        <input type="submit" value="Save changes">
-    </form>
-    {% if message %}
-        <div class="message">{{ message }}</div>
-    {% endif %}
-</div>
-<div class="container">
-    <form method="POST">
-        <input type="hidden" name="form_type" value="update_password">
+            <input type="submit" value="Save changes">
+        </form>
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
+    </div>
+    <div class="container">
+        <form method="POST">
+            <input type="hidden" name="form_type" value="update_password">
 
-        <label for="new_password">New password:</label>
-        <input type="password" id="new_password" name="new_password" required>
+            <label for="new_password">New password:</label>
+            <input type="password" id="new_password" name="new_password" required>
 
-        <label for="old_password">Old password:</label>
-        <input type="password" id="old_password" name="old_password" required>
-        <input type="submit" value="Change password">
-    </form>
+            <label for="old_password">Old password:</label>
+            <input type="password" id="old_password" name="old_password" required>
+            <input type="submit" value="Change password">
+        </form>
 
-    {% if password_message %}
-        <div class="message">{{ password_message }}</div>
-    {% endif %}
-</div>
-
+        {% if password_message %}
+            <div class="message">{{ password_message }}</div>
+        {% endif %}
+    </div>
 </body>
 </html>
