@@ -36,10 +36,11 @@ def historical_dashboards():
 
 @app.route("/calculator", methods=["GET", "POST"])
 def calculator():
+    user_id = session.get("user_id")
     if request.method == "POST":
-        return calculator_page_post(request.form)
+        return calculator_page_post(request.form, user_id)
     else:
-        return calculator_page_get()
+        return calculator_page_get(user_id)
 
 @app.route('/edit_profile', methods=["GET", "POST"])
 def edit_profile():
