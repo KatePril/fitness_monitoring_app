@@ -6,6 +6,9 @@ from fitness_monitor_web_app.src.registration_login_edit.landing import process_
 from fitness_monitor_web_app.src.registration_login_edit.edit_account import edit_account_get, edit_account_post
 from fitness_monitor_web_app.src.dashboards.main_dashboard import get_main_dashboard
 from fitness_monitor_web_app.src.dashboards.historical_dashboard import get_historical_dashboard
+from fitness_monitor_web_app.src.calculator.calculator_page import calculator_page_get, calculator_page_post
+
+
 app = Flask(__name__)
 
 load_dotenv()
@@ -31,14 +34,22 @@ def historical_dashboards():
         return redirect("/")
     return get_historical_dashboard(user_id)
 
-@app.route('/edit-profile', methods=["GET", "POST"])
+@app.route("/calculator", methods=["GET", "POST"])
+def calculator():
+    user_id = session.get("user_id")
+    if request.method == "POST":
+        return calculator_page_post(request.form, user_id)
+    else:
+        return calculator_page_get(user_id)
+
+@app.route('/edit_profile', methods=["GET", "POST"])
 def edit_profile():
     if request.method == "POST":
         return edit_account_post(request.form)
     else:
         return edit_account_get()
 
-@app.route('/sign-out')
+@app.route('/sign_out')
 def sign_out():
     session.pop("user_id")
     return redirect("/")

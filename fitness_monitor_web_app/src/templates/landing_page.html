@@ -76,6 +76,35 @@
             margin: 20px auto;
         }
 
+        .content {
+            max-width: 100%;
+            margin: 35px auto;
+            padding: 20px;
+             display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background-color: #77f3ef;
+            border: 2px solid #77f3ef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-box h3 {
+            margin: 0;
+            color: #047140;
+        }
+
+        #dashboard-button {
+            width: 100%;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 
@@ -124,6 +153,12 @@
     {% if message %}
         <p>{{ message }}</p>
     {% endif %}
+
+    <div class="content">
+        <form action="{{ url_for('calculator') }}" method="get" style="display:inline;width:100%">
+            <button type="submit" class="stat-box" id="dashboard-button">Try steps calculator</button>
+        </form>
+    </div>
 </body>
 
 </html>

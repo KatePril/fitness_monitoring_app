@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8fdfc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #47b985;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        header form {
+            margin-left: 10px;
+        }
+
+        header button {
+            background-color: #77f3ef;
+            border: none;
+            padding: 10px 16px;
+            margin-left: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        header button:hover {
+            background-color: #16e97b;
+            color: white;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 35px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .container h2 {
+            color: #047140;
+        }
+
+        .container label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .container input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 2px solid #77f3ef;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            margin-top: 15px;
+            width: 100%;
+            background-color: #47b985;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            box-sizing: border-box;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #16e97b;
+        }
+
+        .container div {
+            margin-top: 20px;
+            background-color: #77f3ef;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #047140;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Calculator</h1>
+        <div>
+            {% if user_id %}
+                <form action="{{ url_for('main_dashboard') }}" method="get" style="display:inline; width:100%;">
+                    <button type="submit">← Return to dashboard</button>
+                </form>
+                <form action="{{ url_for('edit_profile') }}" method="get" style="display:inline;">
+                    <button type="submit">Edit profile</button>
+                </form>
+                <form action="{{ url_for('sign_out') }}" method="get" style="display:inline;">
+                    <button type="submit">Sign out</button>
+                </form>
+            {% else %}
+                <form action="{{ url_for('index') }}" method="get" style="display:inline;">
+                    <button type="submit">Sign in/Sign up</button>
+                </form>
+            {% endif %}
+        </div>
+    </header>
+    <div class="container">
+        <h2>Want to lose some weight?)</h2>
+        <form method="POST">
+            <label for="kilos">How many kilos do you want to lose?</label>
+            <input type="number" id="kilos" name="kilos" value="0" step="0.1" min="0" required>
+
+            <label for="days">In how many days you want to achieve your goal?</label>
+            <input type="number" id="days" name="days" value="0" step="1" min="0" required>
+
+            <input type="submit" value="Calculate">
+        </form>
+
+        {% if result %}
+            <div>Walk {{ result }} steps daily to achieve your goal</div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
