@@ -94,6 +94,9 @@
     <header>
         <h1>This is your past activity statistics, {{ username }}</h1>
         <div>
+            <form action="{{ url_for('calculator') }}" method="get" style="display:inline;">
+                <button type="submit">Steps calculator</button>
+            </form>
             <form action="{{ url_for('edit_profile') }}" method="get" style="display:inline;">
                 <button type="submit">Edit profile</button>
             </form>
