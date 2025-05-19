@@ -1,12 +1,13 @@
 import unittest
 from unittest.mock import Mock
 
-from fitness_monitor_web_app.src.dashboards.queries.select_today_charts_data import *
+from fitness_monitor_web_app.src.dashboards.queries.select_today_charts_data import TodayChartsDataSelector
 
 
 class TestChartDataRetrieval(unittest.TestCase):
     def setUp(self):
         self.mock_cursor = Mock()
+        self.today_charts_data_selector = TodayChartsDataSelector(self.mock_cursor)
 
     def test_select_today_charts_data(self):
         fetched_data = [
@@ -19,9 +20,9 @@ class TestChartDataRetrieval(unittest.TestCase):
         ]
         self.mock_cursor.fetchall.return_value = fetched_data
 
-        result = select_today_charts_data(1, self.mock_cursor)
+        result = self.today_charts_data_selector.select_today_charts_data(1)
         self.mock_cursor.execute.assert_called_once_with(
-            SELECT_TODAY_STATISTICS,
+            self.today_charts_data_selector.SELECT_TODAY_STATISTICS,
             (1,)
         )
         self.assertEqual(result, fetched_data)
