@@ -1,4 +1,4 @@
-from fitness_monitor_web_app.src.registration_login_edit.password import check_password
+from fitness_monitor_web_app.src.registration_login_edit.password import PasswordHasher
 from fitness_monitor_web_app.src.entities.user import User
 
 SELECT_BY_EMAIL_QUERY = """
@@ -18,7 +18,7 @@ def check_login(email, password, cursor):
     fetched_data = cursor.fetchone()
 
     if fetched_data:
-        if check_password(password, fetched_data[1]):
+        if PasswordHasher.check_password(password, fetched_data[1]):
             return fetched_data[0]
     else:
         return None

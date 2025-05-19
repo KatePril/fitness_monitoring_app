@@ -3,7 +3,7 @@ from fitness_monitor_web_app.src.registration_login_edit.queries.retrieve_user i
 from fitness_monitor_web_app.src.database_connection import cursor, conn
 from fitness_monitor_web_app.src.entities.user import User
 from fitness_monitor_web_app.src.registration_login_edit.queries.create_user import create_user
-from fitness_monitor_web_app.src.registration_login_edit.password import get_password_hash
+from fitness_monitor_web_app.src.registration_login_edit.password import PasswordHasher
 
 
 class LandingProvider:
@@ -23,7 +23,7 @@ class LandingProvider:
             session["user_id"] = user_id
         elif form_type == "sign_up":
             user = User.from_dict(form)
-            user.password = get_password_hash(user.password)
+            user.password = PasswordHasher.get_password_hash(user.password)
             user_id = create_user(user, cursor, conn)
             session["user_id"] = user_id
         return redirect("/dashboard")
