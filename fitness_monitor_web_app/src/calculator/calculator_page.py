@@ -28,4 +28,4 @@ class CalculatorPageProvider:
             else:
                 return render_template('calculator_page.html', result=result)
         else:
-            return calculator_page_get(user_id)
+            return CalculatorPageProvider.calculator_page_get(user_id)

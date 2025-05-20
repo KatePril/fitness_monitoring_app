@@ -22,7 +22,7 @@ class TestChartDataRetrieval(unittest.TestCase):
 
         result = self.today_charts_data_selector.select_today_charts_data(1)
         self.mock_cursor.execute.assert_called_once_with(
-            self.today_charts_data_selector.SELECT_TODAY_STATISTICS,
+            self.today_charts_data_selector.SELECT_TODAY_STATISTICS_QUERY,
             (1,)
         )
         self.assertEqual(result, fetched_data)

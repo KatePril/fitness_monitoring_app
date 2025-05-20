@@ -1,5 +1,5 @@
 class UserCreator:
-    INSERTION_QUERY = """
+    USER_INSERTION_QUERY = """
         INSERT INTO app_user(username, email, password, weight, height)
         VALUES (%s, %s, %s, %s, %s)
         RETURNING user_id
@@ -12,7 +12,7 @@ class UserCreator:
     def create_user(self, user) -> int|None:
         try:
             self.cursor.execute(
-                self.INSERTION_QUERY,
+                self.USER_INSERTION_QUERY,
                 (
                     user.username,
                     user.email,

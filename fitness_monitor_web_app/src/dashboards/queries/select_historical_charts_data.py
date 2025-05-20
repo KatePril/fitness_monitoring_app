@@ -85,7 +85,6 @@ class HistoricalDataSelector:
     def __init__(self, cursor):
         self.cursor = cursor
 
-
     def select_last_week_data(self, user_id):
         self.cursor.execute(self.SELECT_LAST_WEEK_STATISTICS, (user_id,))
         return self.cursor.fetchall()

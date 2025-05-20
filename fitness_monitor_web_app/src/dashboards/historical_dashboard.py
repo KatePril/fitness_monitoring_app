@@ -37,7 +37,7 @@ class HistoricalDashboardProvider:
         dates = [historical_data[0] for historical_data in historical_data_list]
         steps = [historical_data[1] for historical_data in historical_data_list]
         calories = [historical_data[2] for historical_data in historical_data_list]
-        steps_chart = Chart(steps,rotation=25, categories=dates)
+        steps_chart = Chart(steps, rotation=25, categories=dates)
         calories_chart = Chart(calories, rotation=25, categories=dates)
         return {
             "steps_chart": steps_chart.get_chart_image(), 

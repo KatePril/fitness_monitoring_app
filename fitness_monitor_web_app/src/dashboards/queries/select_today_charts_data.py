@@ -1,5 +1,5 @@
 class TodayChartsDataSelector:
-    SELECT_TODAY_STATISTICS = """
+    SELECT_TODAY_STATISTICS_QUERY = """
         WITH hours AS (
           SELECT generate_series(0, 23) AS hour
         ),
@@ -26,5 +26,5 @@ class TodayChartsDataSelector:
         self.cursor = cursor
 
     def select_today_charts_data(self, user_id):
-        self.cursor.execute(self.SELECT_TODAY_STATISTICS, (user_id,))
+        self.cursor.execute(self.SELECT_TODAY_STATISTICS_QUERY, (user_id,))
         return self.cursor.fetchall()
