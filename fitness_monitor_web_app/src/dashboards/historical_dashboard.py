@@ -1,53 +1,45 @@
 from flask import render_template
-from fitness_monitor_web_app.src.dashboards.queries.select_data import select_username
-from fitness_monitor_web_app.src.dashboards.queries.select_historical_charts_data import (
-    select_last_week_data, 
-    select_last_month_data, 
-    select_last_year_data
-)
-from fitness_monitor_web_app.src.dashboards.charts.chart import Chart
+from fitness_monitor_web_app.src.registration_login_edit.queries.select_user import UserSelector
+from fitness_monitor_web_app.src.dashboards.queries.select_historical_charts_data import HistoricalDataSelector
+from fitness_monitor_web_app.src.dashboards.chart import Chart
 from fitness_monitor_web_app.src.database_connection import cursor
 
-def get_historical_dashboard(user_id):
-    username = select_username(user_id, cursor)
-    last_week_data = select_last_week_data(user_id, cursor)
-    last_week_charts = create_historical_charts(
-        last_week_data,
-        "Last week's steps statistics",
-        "Last week's calories statistics"
-    )
-    last_month_data = select_last_month_data(user_id, cursor)
-    last_month_charts = create_historical_charts(
-        last_month_data,
-        "Last month's steps statistics",
-        "Last month's calories statistics"
-    )
-    last_year_data = select_last_year_data(user_id, cursor)
-    last_year_charts = create_historical_charts(
-        last_year_data,
-        "Last year's steps statistics",
-        "Last year's calories statistics"
-    )
 
-    return render_template(
-        'historical_charts.html',
-        username=username,
-        steps_week=last_week_charts.get("steps_chart"),
-        calories_week=last_week_charts.get("calories_chart"),
-        steps_month=last_month_charts.get("steps_chart"),
-        calories_month=last_month_charts.get("calories_chart"),
-        steps_year=last_year_charts.get("steps_chart"),
-        calories_year=last_year_charts.get("calories_chart"),
-    )
+class HistoricalDashboardProvider:
     
+    @staticmethod
+    def get_historical_dashboard(user_id):
+        user_selector = UserSelector(cursor)
+        username = user_selector.select_username(user_id)
+
+        historical_data_selector = HistoricalDataSelector(cursor)
+        last_week_data = historical_data_selector.select_last_week_data(user_id)
+        last_month_data = historical_data_selector.select_last_month_data(user_id)
+        last_year_data = historical_data_selector.select_last_year_data(user_id)
+
+        last_week_charts = HistoricalDashboardProvider.__create_historical_charts(last_week_data)
+        last_month_charts = HistoricalDashboardProvider.__create_historical_charts(last_month_data)
+        last_year_charts = HistoricalDashboardProvider.__create_historical_charts(last_year_data)
     
-def create_historical_charts(historical_data_list, steps_title, calories_title):
-    dates = [historical_data[0] for historical_data in historical_data_list]
-    steps = [historical_data[1] for historical_data in historical_data_list]
-    calories = [historical_data[2] for historical_data in historical_data_list]
-    steps_chart = Chart(steps, steps_title, rotation=25, categories=dates)
-    calories_chart = Chart(calories, calories_title, rotation=25, categories=dates)
-    return {
-        "steps_chart": steps_chart.get_chart_image(), 
-        "calories_chart": calories_chart.get_chart_image()
-    }
+        return render_template(
+            'historical_charts.html',
+            username=username,
+            steps_week=last_week_charts.get("steps_chart"),
+            calories_week=last_week_charts.get("calories_chart"),
+            steps_month=last_month_charts.get("steps_chart"),
+            calories_month=last_month_charts.get("calories_chart"),
+            steps_year=last_year_charts.get("steps_chart"),
+            calories_year=last_year_charts.get("calories_chart"),
+        )
+        
+    @staticmethod    
+    def __create_historical_charts(historical_data_list):
+        dates = [historical_data[0] for historical_data in historical_data_list]
+        steps = [historical_data[1] for historical_data in historical_data_list]
+        calories = [historical_data[2] for historical_data in historical_data_list]
+        steps_chart = Chart(steps, rotation=25, categories=dates)
+        calories_chart = Chart(calories, rotation=25, categories=dates)
+        return {
+            "steps_chart": steps_chart.get_chart_image(), 
+            "calories_chart": calories_chart.get_chart_image()
+        }

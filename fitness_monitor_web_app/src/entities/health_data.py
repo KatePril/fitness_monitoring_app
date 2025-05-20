@@ -6,10 +6,7 @@ class HealthData:
         self.heart_rate = heart_rate
         self.saturation = saturation
         self.steps = steps
-        if calories:
-            self.calories = calories
-        else:
-            self.calories = self.calculate_calories(self.steps)
+        self.calories = calories if calories else self.calculate_calories(self.steps)
 
     @staticmethod
     def calculate_calories(steps):

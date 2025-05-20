@@ -1,13 +1,14 @@
 import unittest
 from unittest.mock import Mock
 
-from fitness_monitor_web_app.src.registration_login_edit.queries.update_user import *
+from fitness_monitor_web_app.src.registration_login_edit.queries.update_user import UserUpdater
 from fitness_monitor_web_app.src.entities.user import User
 
 class TestEditAccount(unittest.TestCase):
     def setUp(self):
         self.mock_cursor = Mock()
         self.mock_conn = Mock()
+        self.user_updater = UserUpdater(self.mock_cursor, self.mock_conn)
 
         self.user = User(
             username='mark',
@@ -18,7 +19,7 @@ class TestEditAccount(unittest.TestCase):
         )
 
     def test_update_user_successful(self):
-        result = update_user(self.user, self.mock_cursor, self.mock_conn)
+        result = self.user_updater.update_user(self.user)
 
         self.mock_cursor.execute.assert_called_once()
         self.mock_conn.commit.assert_called_once()
@@ -27,14 +28,14 @@ class TestEditAccount(unittest.TestCase):
 
     def test_update_user_failure(self):
         self.mock_cursor.execute.side_effect = Exception("DB error")
-        result = update_password(self.user, self.mock_cursor, self.mock_conn)
+        result = self.user_updater.update_password(self.user)
 
         self.mock_conn.rollback.assert_called_once()
         self.mock_conn.commit.assert_not_called()
         self.assertFalse(result)
 
     def test_update_password_successful(self):
-        result = update_password(self.user, self.mock_cursor, self.mock_conn)
+        result = self.user_updater.update_password(self.user)
 
         self.mock_cursor.execute.assert_called_once()
         self.mock_conn.commit.assert_called_once()
@@ -43,7 +44,7 @@ class TestEditAccount(unittest.TestCase):
 
     def test_update_password_failure(self):
         self.mock_cursor.execute.side_effect = Exception("DB error")
-        result = update_password(self.user, self.mock_cursor, self.mock_conn)
+        result = self.user_updater.update_password(self.user)
 
         self.mock_conn.rollback.assert_called_once()
         self.mock_conn.commit.assert_not_called()

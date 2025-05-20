@@ -2,12 +2,13 @@ import datetime
 import unittest
 from unittest.mock import Mock
 
-from fitness_monitor_web_app.src.dashboards.queries.select_historical_charts_data import *
+from fitness_monitor_web_app.src.dashboards.queries.select_historical_charts_data import HistoricalDataSelector
 
 
 class TestHistoricalDataRetrieval(unittest.TestCase):
     def setUp(self):
         self.mock_cursor = Mock()
+        self.historical_data_selector = HistoricalDataSelector(self.mock_cursor)
 
     def test_week_data_retrieval(self):
         fetched_data = [
@@ -18,9 +19,9 @@ class TestHistoricalDataRetrieval(unittest.TestCase):
         ]
         self.mock_cursor.fetchall.return_value = fetched_data
 
-        result = select_last_week_data(1, self.mock_cursor)
+        result = self.historical_data_selector.select_last_week_data(1)
         self.mock_cursor.execute.assert_called_once_with(
-            SELECT_LAST_WEEK_STATISTICS,
+            self.historical_data_selector.SELECT_LAST_WEEK_STATISTICS,
             (1,)
         )
         self.assertEqual(result, fetched_data)
@@ -41,9 +42,9 @@ class TestHistoricalDataRetrieval(unittest.TestCase):
         ]
         self.mock_cursor.fetchall.return_value = fetched_data
 
-        result = select_last_month_data(1, self.mock_cursor)
+        result = self.historical_data_selector.select_last_month_data(1)
         self.mock_cursor.execute.assert_called_once_with(
-            SELECT_LAST_MONTH_STATISTICS,
+            self.historical_data_selector.SELECT_LAST_MONTH_STATISTICS,
             (1,)
         )
         self.assertEqual(result, fetched_data)
@@ -56,9 +57,12 @@ class TestHistoricalDataRetrieval(unittest.TestCase):
         ]
         self.mock_cursor.fetchall.return_value = fetched_data
 
-        result = select_last_year_data(1, self.mock_cursor)
+        result = self.historical_data_selector.select_last_year_data(1)
         self.mock_cursor.execute.assert_called_once_with(
-            SELECT_LAST_YEAR_STATISTICS,
+            self.historical_data_selector.SELECT_LAST_YEAR_STATISTICS,
             (1,)
         )
         self.assertEqual(result, fetched_data)
+
+if __name__ == '__main__':
+    unittest.main()

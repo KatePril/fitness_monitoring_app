@@ -2,12 +2,13 @@ import unittest
 from unittest.mock import Mock
 
 from fitness_monitor_web_app.src.entities.user import User
-from fitness_monitor_web_app.src.registration_login_edit.queries.create_user import create_user
+from fitness_monitor_web_app.src.registration_login_edit.queries.create_user import UserCreator
 
 class TestInsertUser(unittest.TestCase):
     def setUp(self):
         self.mock_cursor = Mock()
         self.mock_conn = Mock()
+        self.user_creator = UserCreator(self.mock_cursor, self.mock_conn)
 
         self.user = User(
             username = 'mark',
@@ -19,7 +20,7 @@ class TestInsertUser(unittest.TestCase):
 
     def test_insert_successful(self):
         self.mock_cursor.fetchone.return_value = (1,)
-        result = create_user(self.user, self.mock_cursor, self.mock_conn)
+        result =  self.user_creator.create_user(self.user)
 
         self.mock_cursor.execute.assert_called_once()
         self.mock_conn.commit.assert_called_once()
@@ -28,7 +29,7 @@ class TestInsertUser(unittest.TestCase):
 
     def test_insert_failure(self):
         self.mock_cursor.execute.side_effect = Exception("DB error")
-        result = create_user(self.user, self.mock_cursor, self.mock_conn)
+        result =  self.user_creator.create_user(self.user)
 
         self.mock_conn.rollback.assert_called_once()
         self.mock_conn.commit.assert_not_called()
