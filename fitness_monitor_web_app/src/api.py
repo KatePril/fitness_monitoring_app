@@ -44,6 +44,9 @@ def calculator():
 
 @app.route('/edit_profile', methods=["GET", "POST"])
 def edit_profile():
+    user_id = session.get("user_id")
+    if user_id is None:
+        return redirect("/")
     if request.method == "POST":
         return EditAccountPageProvider.edit_account_post(request.form)
     else:
