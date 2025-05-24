@@ -51,7 +51,7 @@
             max-width: 100%;
             margin: 35px auto;
             padding: 20px;
-             display: flex;
+            display: flex;
             justify-content: space-around;
             align-items: center;
             flex-wrap: wrap;
@@ -114,8 +114,14 @@
         </div>
     </div>
     <div class="content">
-        <img src="data:image/png;base64,{{ steps_chart }}" class="chart-img" alt="Bar Chart">
-        <img src="data:image/png;base64,{{ calories_chart }}" class="chart-img" alt="Bar Chart">
+        <div>
+            <h3>Steps</h3>
+            <img src="data:image/png;base64,{{ steps_chart }}" class="chart-img" alt="Bar Chart">
+        </div>
+        <div>
+            <h3>Calories</h3>
+            <img src="data:image/png;base64,{{ calories_chart }}" class="chart-img" alt="Bar Chart">
+        </div>
     </div>
     <div class="content">
         <form action="{{ url_for('historical_dashboards') }}" method="get" style="display:inline;width:100%">
